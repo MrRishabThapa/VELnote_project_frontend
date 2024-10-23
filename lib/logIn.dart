@@ -14,6 +14,7 @@ class _MyLogInState extends State<MyLogIn> {
   late Size mediaSize;
   TextEditingController emailCotroller = TextEditingController();
   TextEditingController passwordCotroller = TextEditingController();
+  bool rememberUser = false;
   @override
   Widget build(BuildContext context) {
     myColor = Theme.of(context).primaryColor;
@@ -76,7 +77,7 @@ class _MyLogInState extends State<MyLogIn> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'WELCOME TO VELNote',
+          'Hello ',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w200,
@@ -84,11 +85,18 @@ class _MyLogInState extends State<MyLogIn> {
           ),
         ),
         _makeGreyText('Please Enter your E-mail and Password '),
-        const SizedBox(height: 50),
+        const SizedBox(height: 55),
         _makeGreyText('E-mail Address'),
         _buildInputFeild(emailCotroller),
+        const SizedBox(height: 35),
         _makeGreyText('Password'),
-        _buildInputFeild(passwordCotroller),
+        _buildInputFeild(passwordCotroller, isPassword: true),
+        const SizedBox(height: 15),
+        _buildRememberForget(),
+        const SizedBox(height: 15),
+        _buildLogInButton(),
+        const SizedBox(height: 15),
+        _buildOtherLogin()
       ],
     );
   }
@@ -105,5 +113,68 @@ class _MyLogInState extends State<MyLogIn> {
   Widget _buildInputFeild(TextEditingController controller,
       {isPassword = false}) {
     return TextField();
+  }
+
+  Widget _buildRememberForget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Checkbox(
+                value: rememberUser,
+                onChanged: (value) {
+                  setState(() {
+                    rememberUser = value!;
+                  });
+                }),
+            _makeGreyText('Remember Me'),
+          ],
+        ),
+        TextButton(
+            onPressed: () {}, child: _makeGreyText('I forget my Password'))
+      ],
+    );
+  }
+
+  Widget _buildLogInButton() {
+    return ElevatedButton(
+      onPressed: () {
+        debugPrint('Email : ${emailCotroller.text}');
+        debugPrint('Password : ${passwordCotroller.text}');
+      },
+      style: ElevatedButton.styleFrom(
+        shape: const StadiumBorder(),
+        elevation: 20,
+        backgroundColor: Colors.deepPurple,
+        shadowColor: myColor,
+        minimumSize: const Size.fromHeight(60),
+      ),
+      child: const Text(
+        'LOGIN',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOtherLogin() {
+    return Center(
+        child: Column(
+      children: [
+        _makeGreyText('or Login With'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Tab(icon: Image.asset("assets/fb.png")),
+            Tab(icon: Image.asset('assets/github.png')),
+            Tab(icon: Image.asset('assets/google.png'))
+          ],
+        )
+      ],
+    ));
   }
 }
