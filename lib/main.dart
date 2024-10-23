@@ -4,8 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:velnoteproj/logIn.dart';
 
 void main() {
-  runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: 'login',
-      routes: {'login': (Context) => MyLogIn()}));
+  runApp(VELNote());
+}
+
+class VELNote extends StatelessWidget {
+  const VELNote({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'PROJECT VELNote',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.deepPurple,
+        ),
+        home: MyLogIn());
+  }
 }
