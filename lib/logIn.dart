@@ -15,6 +15,8 @@ class _MyLogInState extends State<MyLogIn> {
   TextEditingController emailCotroller = TextEditingController();
   TextEditingController passwordCotroller = TextEditingController();
   bool rememberUser = false;
+
+  get children => null;
   @override
   Widget build(BuildContext context) {
     myColor = Theme.of(context).primaryColor;
@@ -77,18 +79,17 @@ class _MyLogInState extends State<MyLogIn> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Hello ',
+          ' Hello! \n Ready to dive back in',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w600,
             color: myColor,
           ),
         ),
-        _makeGreyText('Please Enter your E-mail and Password '),
-        const SizedBox(height: 55),
+        const SizedBox(height: 45),
         _makeGreyText('E-mail Address'),
         _buildInputFeild(emailCotroller),
-        const SizedBox(height: 35),
+        const SizedBox(height: 15),
         _makeGreyText('Password'),
         _buildInputFeild(passwordCotroller, isPassword: true),
         const SizedBox(height: 15),
@@ -105,47 +106,83 @@ class _MyLogInState extends State<MyLogIn> {
     return Text(
       text,
       style: const TextStyle(
-        color: Colors.grey,
+        fontWeight: FontWeight.bold,
+        color: Color.fromARGB(164, 132, 19, 197),
+      ),
+    );
+  }
+
+  Widget _makeLIghtText(String text) {
+    return Text(
+      text,
+      style: const TextStyle(
+        fontWeight: FontWeight.bold,
+        color: Color.fromARGB(128, 41, 39, 39),
       ),
     );
   }
 
   Widget _buildInputFeild(TextEditingController controller,
+
+// create a texteditingcontroller where text can be written in a box
       {isPassword = false}) {
-    return TextField();
+    return TextField(
+        controller: controller,
+        obscureText: isPassword,
+        // make hint text in box grey and lighter shade
+        style: TextStyle(
+            color: const Color.fromARGB(255, 14, 13, 14),
+            fontWeight: FontWeight.w700),
+        decoration: InputDecoration(
+          hintText: isPassword ? 'Enter Password' : 'Enter E-mail Address',
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(25),
+              borderSide: BorderSide(color: Colors.grey)),
+        ));
   }
 
   Widget _buildRememberForget() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            Checkbox(
-                value: rememberUser,
-                onChanged: (value) {
-                  setState(() {
-                    rememberUser = value!;
-                  });
-                }),
-            _makeGreyText('Remember Me'),
-          ],
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      Row(
+        children: [
+          Checkbox(
+              value: rememberUser,
+              // make checkbox grey
+
+              onChanged: (value) {
+                setState(() {
+                  rememberUser = value!;
+                });
+              }),
+          _makeLIghtText('Remember Me'),
+        ],
+      ),
+      Row(children: [
+        Icon(
+          // make icon grey
+          color: Colors.grey,
+          size: 25,
+          Icons.lock,
         ),
         TextButton(
-            onPressed: () {}, child: _makeGreyText('I forget my Password'))
-      ],
-    );
+          onPressed: () {
+            debugPrint('Forgot Password');
+          },
+          child: _makeLIghtText('Forgot Password?'),
+        )
+      ])
+    ]);
   }
 
   Widget _buildLogInButton() {
-    return ElevatedButton(
+    return TextButton(
       onPressed: () {
         debugPrint('Email : ${emailCotroller.text}');
         debugPrint('Password : ${passwordCotroller.text}');
       },
-      style: ElevatedButton.styleFrom(
+      style: TextButton.styleFrom(
         shape: const StadiumBorder(),
-        elevation: 20,
+        padding: EdgeInsets.all(10),
         backgroundColor: Colors.deepPurple,
         shadowColor: myColor,
         minimumSize: const Size.fromHeight(60),
