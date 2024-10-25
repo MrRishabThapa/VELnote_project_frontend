@@ -98,7 +98,6 @@ class _MyLogInState extends State<MyLogIn> {
         const SizedBox(height: 15),
         _buildLogInButton(),
         const SizedBox(height: 15),
-        _buildOtherLogin()
       ],
     );
   }
@@ -184,23 +183,6 @@ class _MyLogInState extends State<MyLogIn> {
         ),
       ),
     );
-  }
-
-  Widget _buildOtherLogin() {
-    return Center(
-        child: Column(
-      children: [
-        _makeGreyText('or Login With', TextStyle(fontSize: 15)),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Tab(icon: Image.asset("assets/fb.png")),
-            Tab(icon: Image.asset('assets/github.png')),
-            Tab(icon: Image.asset('assets/google.png'))
-          ],
-        )
-      ],
-    ));
   }
 
   Widget _buildSignUpConnector() {
