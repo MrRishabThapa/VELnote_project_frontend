@@ -25,7 +25,7 @@ class _MyLogInState extends State<MyLogIn> {
       decoration: BoxDecoration(
         color: myColor,
         image: DecorationImage(
-            image: const AssetImage('assets/login.jpg'),
+            image: const AssetImage('assets/bg.jpeg'),
             fit: BoxFit.fill,
             colorFilter:
                 ColorFilter.mode(myColor.withOpacity(0.7), BlendMode.dstATop)),
@@ -79,7 +79,7 @@ class _MyLogInState extends State<MyLogIn> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          ' Hello! \n Ready to dive back in',
+          ' Welcome',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w600,
@@ -87,13 +87,14 @@ class _MyLogInState extends State<MyLogIn> {
           ),
         ),
         const SizedBox(height: 45),
-        _makeGreyText('E-mail Address'),
+        _makeGreyText('E-mail Address', TextStyle(fontSize: 30)),
         _buildInputFeild(emailCotroller),
         const SizedBox(height: 15),
-        _makeGreyText('Password'),
+        _makeGreyText('Password', TextStyle(fontSize: 15)),
         _buildInputFeild(passwordCotroller, isPassword: true),
         const SizedBox(height: 15),
         _buildRememberForget(),
+        _buildSignUpConnector(),
         const SizedBox(height: 15),
         _buildLogInButton(),
         const SizedBox(height: 15),
@@ -102,7 +103,7 @@ class _MyLogInState extends State<MyLogIn> {
     );
   }
 
-  Widget _makeGreyText(String text) {
+  Widget _makeGreyText(String text, TextStyle textStyle) {
     return Text(
       text,
       style: const TextStyle(
@@ -134,6 +135,7 @@ class _MyLogInState extends State<MyLogIn> {
             color: const Color.fromARGB(255, 14, 13, 14),
             fontWeight: FontWeight.w700),
         decoration: InputDecoration(
+          hintStyle: TextStyle(color: Colors.grey),
           hintText: isPassword ? 'Enter Password' : 'Enter E-mail Address',
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(25),
@@ -143,20 +145,6 @@ class _MyLogInState extends State<MyLogIn> {
 
   Widget _buildRememberForget() {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Row(
-        children: [
-          Checkbox(
-              value: rememberUser,
-              // make checkbox grey
-
-              onChanged: (value) {
-                setState(() {
-                  rememberUser = value!;
-                });
-              }),
-          _makeLIghtText('Remember Me'),
-        ],
-      ),
       Row(children: [
         Icon(
           // make icon grey
@@ -168,7 +156,7 @@ class _MyLogInState extends State<MyLogIn> {
           onPressed: () {
             debugPrint('Forgot Password');
           },
-          child: _makeLIghtText('Forgot Password?'),
+          child: _makeLIghtText('Forgot Your Password?'),
         )
       ])
     ]);
@@ -202,7 +190,7 @@ class _MyLogInState extends State<MyLogIn> {
     return Center(
         child: Column(
       children: [
-        _makeGreyText('or Login With'),
+        _makeGreyText('or Login With', TextStyle(fontSize: 15)),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -213,5 +201,22 @@ class _MyLogInState extends State<MyLogIn> {
         )
       ],
     ));
+  }
+
+  Widget _buildSignUpConnector() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            _makeLIghtText('Dont Have an Account?'),
+            TextButton(
+              onPressed: () {},
+              child: _makeGreyText("Sign Up", TextStyle(fontSize: 25)),
+            )
+          ],
+        )
+      ],
+    );
   }
 }
