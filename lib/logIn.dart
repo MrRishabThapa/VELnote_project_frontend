@@ -25,7 +25,7 @@ class _MyLogInState extends State<MyLogIn> {
       decoration: BoxDecoration(
         color: myColor,
         image: DecorationImage(
-            image: const AssetImage('assets/bg.jpeg'),
+            image: const AssetImage('assets/login2.jpg'),
             fit: BoxFit.fill,
             colorFilter:
                 ColorFilter.mode(myColor.withOpacity(0.7), BlendMode.dstATop)),
@@ -68,7 +68,7 @@ class _MyLogInState extends State<MyLogIn> {
             topRight: Radius.circular(25),
           )),
           child: Padding(
-            padding: const EdgeInsets.all(25.0),
+            padding: const EdgeInsets.all(35.0),
             child: _bulidForm(),
           )),
     );
